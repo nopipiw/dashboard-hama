@@ -53,15 +53,15 @@ export default function ChartHama() {
 
   return (
     <div className="space-y-4 lg:space-y-10 animate-in slide-in-from-bottom-5 duration-700">
-      <div className="bg-gradient-to-r from-slate-900 to-indigo-900 rounded-2xl lg:rounded-[3.5rem] p-6 lg:p-14 text-white shadow-2xl relative overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-900 to-indigo-900 rounded-2xl lg:rounded-3xl p-6 lg:p-10 text-white shadow-2xl relative overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-indigo-500/20 blur-[120px] -mb-40 -mr-40 text-indigo-400"></div>
         <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-4 lg:gap-8">
           <div className="p-3 lg:p-4 bg-white/10 backdrop-blur-md rounded-xl lg:rounded-3xl border border-white/10 self-center md:self-start">
             <Activity className="w-8 h-8 lg:w-12 lg:h-12 text-indigo-400" />
           </div>
           <div className="text-center md:text-left">
-            <h2 className="text-xl lg:text-5xl font-black tracking-tight leading-none mb-2">Chart Hama</h2>
-            <p className="text-slate-300 max-w-2xl font-bold text-[10px] lg:text-xl leading-relaxed">
+            <h2 className="text-xl lg:text-4xl font-black tracking-tight leading-none mb-2">Chart Hama</h2>
+            <p className="text-slate-300 max-w-2xl font-bold text-[10px] lg:text-lg leading-relaxed">
               Grafik aktivitas dan riwayat deteksi hama pada lahan.
             </p>
           </div>
@@ -69,10 +69,10 @@ export default function ChartHama() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12">
-        <div className="bg-white p-5 lg:p-10 rounded-2xl lg:rounded-[2.5rem] border border-slate-100 shadow-xl">
+        <div className="bg-white p-5 lg:p-9 rounded-2xl lg:rounded-3xl border border-slate-100 shadow-xl">
           <div className="flex items-center justify-between mb-6 lg:mb-10">
             <div>
-              <h3 className="text-lg lg:text-3xl font-black text-slate-800 leading-none">Tren Mingguan</h3>
+              <h3 className="text-lg lg:text-2xl font-black text-slate-800 leading-none">Tren Mingguan</h3>
               <p className="text-[10px] lg:text-sm font-bold text-slate-400 uppercase mt-1 tracking-widest">Hama per hari</p>
             </div>
             <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl lg:rounded-2xl">
@@ -98,7 +98,7 @@ export default function ChartHama() {
           </div>
         </div>
 
-        <div className="bg-white p-5 lg:p-10 rounded-2xl lg:rounded-[2.5rem] border border-slate-100 shadow-xl">
+        <div className="bg-white p-5 lg:p-9 rounded-2xl lg:rounded-3xl border border-slate-100 shadow-xl">
           <div className="flex items-center justify-between mb-6 lg:mb-10">
             <div>
               <h3 className="text-lg lg:text-3xl font-black text-slate-800 leading-none">Deteksi Terakhir</h3>
@@ -126,12 +126,12 @@ export default function ChartHama() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl lg:rounded-[3.5rem] border border-slate-100 shadow-xl overflow-hidden">
-        <div className="p-6 lg:p-12 border-b-2 border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/30 text-center sm:text-left">
-          <h3 className="text-lg lg:text-3xl font-black text-slate-800 flex items-center justify-center sm:justify-start gap-4 leading-none">
+      <div className="bg-white rounded-2xl lg:rounded-3xl border border-slate-100 shadow-xl overflow-hidden">
+        <div className="p-6 lg:p-10 border-b-2 border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/30 text-center sm:text-left">
+          <h3 className="text-lg lg:text-2xl font-black text-slate-800 flex items-center justify-center sm:justify-start gap-4 leading-none">
             <Filter className="w-5 h-5 text-slate-400" /> Semua Riwayat
           </h3>
-          <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 lg:px-10 py-3 lg:py-5 bg-slate-800 text-white rounded-xl lg:rounded-3xl font-black text-[10px] lg:text-lg hover:bg-slate-700 shadow-lg transition-all">
+          <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 lg:px-9 py-3 lg:py-4 bg-slate-800 text-white rounded-xl lg:rounded-2xl font-black text-[10px] lg:text-base hover:bg-slate-700 shadow-lg transition-all">
             <Download className="w-4 h-4" /> Download Laporan
           </button>
         </div>
@@ -139,39 +139,39 @@ export default function ChartHama() {
           <table className="w-full text-left min-w-[600px]">
             <thead className="sticky top-0 z-10">
               <tr className="bg-slate-50/90 backdrop-blur-md text-slate-400 text-[10px] lg:text-sm font-black uppercase tracking-widest border-b border-slate-100">
-                <th className="p-5 lg:p-8">Nama Hama</th>
-                <th className="p-5 lg:p-8">Waktu Muncul</th>
-                <th className="p-5 lg:p-8 text-center">Jumlah</th>
-                <th className="p-5 lg:p-8 text-right">Aksi</th>
+                <th className="p-5 lg:p-6">Nama Hama</th>
+                <th className="p-5 lg:p-6">Waktu Muncul</th>
+                <th className="p-5 lg:p-6 text-center">Jumlah</th>
+                <th className="p-5 lg:p-6 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
               {historyData.map((log, i) => (
                 <tr key={i} className="group hover:bg-indigo-50/30 transition-all">
-                  <td className="p-5 lg:p-8 border-l-4 lg:border-l-8 border-transparent group-hover:border-indigo-500">
+                  <td className="p-5 lg:p-6 border-l-4 lg:border-l-8 border-transparent group-hover:border-indigo-500">
                     <div className="flex items-center gap-4 lg:gap-6 leading-none">
                       <div className="w-10 h-10 lg:w-16 lg:h-16 bg-white rounded-xl lg:rounded-3xl flex items-center justify-center text-slate-400 border-2 border-slate-100 shadow-sm transition-transform group-hover:scale-110">
                         <Bug className="w-5 h-5 lg:w-8 lg:h-8 text-indigo-600" />
                       </div>
-                      <p className="font-black text-slate-800 text-sm lg:text-2xl">{log.jenis_hama}</p>
+                      <p className="font-black text-slate-800 text-sm lg:text-xl">{log.jenis_hama}</p>
                     </div>
                   </td>
-                  <td className="p-5 lg:p-8">
+                  <td className="p-5 lg:p-6">
                     <div className="flex flex-col leading-snug">
-                      <span className="text-slate-800 font-extrabold text-xs lg:text-xl">
+                      <span className="text-slate-800 font-extrabold text-xs lg:text-lg">
                         {new Date(log.waktu_deteksi).toLocaleDateString("id-ID", { day: "numeric", month: "long" })}
                       </span>
-                      <span className="text-slate-400 text-[10px] lg:text-lg font-bold">
+                      <span className="text-slate-400 text-[10px] lg:text-base font-bold">
                         Jam {new Date(log.waktu_deteksi).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                       </span>
                     </div>
                   </td>
-                  <td className="p-5 lg:p-8 text-center">
-                    <span className={`inline-block px-3 lg:px-10 py-1 lg:py-3 rounded-lg lg:rounded-full text-xs lg:text-xl font-black shadow-md leading-none ${log.jumlah > 10 ? "bg-red-600 text-white" : "bg-emerald-500 text-white"}`}>
+                  <td className="p-5 lg:p-6 text-center">
+                    <span className={`inline-block px-3 lg:px-8 py-1 lg:py-3 rounded-lg lg:rounded-full text-xs lg:text-lg font-black shadow-md leading-none ${log.jumlah > 10 ? "bg-red-600 text-white" : "bg-emerald-500 text-white"}`}>
                       {log.jumlah} Ekor
                     </span>
                   </td>
-                  <td className="p-5 lg:p-8 text-right">
+                  <td className="p-5 lg:p-6 text-right">
                     <button className="p-3 bg-slate-50 text-slate-400 group-hover:text-indigo-600 group-hover:bg-white rounded-xl shadow-sm transition-all leading-none">
                       <ChevronRight className="w-5 h-5 lg:w-8 lg:h-8" />
                     </button>

@@ -8,6 +8,7 @@ import {
   Lightbulb,
   LogOut,
   Menu,
+  Shield,
   Sprout,
   User,
   X,
@@ -37,7 +38,7 @@ export default function DashboardLayout({
           </h1>
         </div>
         <button
-          className="p-2 text-slate-600 hover:bg-slate-50 rounded-xl transition-colors"
+          className="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -46,7 +47,7 @@ export default function DashboardLayout({
 
       {notification && (
         <div className="fixed top-20 lg:top-6 right-4 lg:right-6 z-[100] w-[calc(100%-2rem)] md:w-96 animate-in slide-in-from-right duration-500">
-          <div className="bg-white border-2 border-red-100 rounded-[1.5rem] lg:rounded-[2rem] shadow-2xl p-4 lg:p-6 relative overflow-hidden">
+          <div className="bg-white border-2 border-red-100 rounded-2xl shadow-2xl p-4 lg:p-5 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-2 h-full bg-red-500"></div>
             <div className="flex items-start gap-4">
               <div className="p-2 bg-red-50 rounded-xl text-red-600 animate-bounce">
@@ -138,10 +139,18 @@ export default function DashboardLayout({
             onClick={() => setIsSidebarOpen(false)}
             to="/profil"
           />
+          {auth?.user?.role === "admin" && (
+            <SidebarNavLink
+              icon={<Shield size={28} />}
+              label="Mode Admin"
+              onClick={() => setIsSidebarOpen(false)}
+              to="/admin"
+            />
+          )}
         </nav>
 
         <button
-          className="mt-6 flex items-center justify-center gap-3 px-5 py-4 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-[1.35rem] transition-all font-black text-sm lg:text-base border-2 border-red-100 shadow-md"
+          className="mt-6 flex items-center justify-center gap-3 px-5 py-3.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-xl transition-all font-black text-sm lg:text-base border-2 border-red-100 shadow-md"
           onClick={handleLogout}
         >
           <LogOut size={22} />
@@ -149,19 +158,19 @@ export default function DashboardLayout({
         </button>
       </aside>
 
-      <main className="flex-1 p-3 md:p-5 lg:px-6 lg:py-6 w-full overflow-hidden">
+      <main className="flex-1 p-3 md:p-5 lg:px-6 lg:py-5 w-full overflow-hidden">
         <div className="max-w-[1220px] mx-auto">
-        <header className="flex flex-col md:flex-row md:items-start justify-between gap-4 lg:gap-5 mb-4 lg:mb-6 bg-white/70 border border-slate-200/70 shadow-sm p-4 lg:px-5 lg:py-4 rounded-[1.5rem]">
+        <header className="flex flex-col md:flex-row md:items-start justify-between gap-4 lg:gap-5 mb-4 lg:mb-6 bg-white/70 border border-slate-200/70 shadow-sm p-4 lg:px-5 lg:py-4 rounded-2xl">
           <div className="space-y-1">
             <h2 className="text-[10px] lg:text-xs font-black text-green-600 uppercase tracking-[0.22em] mb-0.5 lg:mb-1">
               Wilayah: Karawang, Tempuran
             </h2>
-            <h3 className="text-[1.7rem] lg:text-[2.8rem] font-black text-slate-800 leading-[0.95] tracking-tight">Monitoring Sawah</h3>
+            <h3 className="text-[1.6rem] lg:text-[2.35rem] font-black text-slate-800 leading-[0.95] tracking-tight">Monitoring Sawah</h3>
           </div>
           <div className="flex items-center justify-between md:justify-end gap-3 lg:gap-4">
             <RodentNotificationButton />
             <Link
-              className="flex items-center gap-2 lg:gap-3 bg-white p-1.5 pr-3 lg:p-2.5 lg:pr-4 rounded-[1.35rem] shadow-sm border border-slate-100 hover:border-green-200 transition-all min-w-[160px]"
+              className="flex items-center gap-2 lg:gap-3 bg-white p-1.5 pr-3 lg:p-2.5 lg:pr-4 rounded-xl shadow-sm border border-slate-100 hover:border-green-200 transition-all min-w-[160px]"
               to="/profil"
             >
               <div className="w-8 h-8 lg:w-11 lg:h-11 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-600 border border-slate-200 uppercase text-sm lg:text-base">
@@ -169,7 +178,7 @@ export default function DashboardLayout({
               </div>
               <div className="text-left">
                 <p className="text-[8px] lg:text-[10px] text-slate-400 font-black uppercase tracking-[0.12em] leading-none">
-                  Petani
+                  {auth?.user?.role || "petani"}
                 </p>
                 <p className="text-xs lg:text-sm font-black text-slate-700 leading-tight">
                   {auth?.user?.username || "User"}
@@ -179,7 +188,7 @@ export default function DashboardLayout({
           </div>
         </header>
 
-        <div className="bg-white/35 backdrop-blur-sm rounded-[1.5rem] lg:rounded-[2rem] min-h-[calc(100vh-14rem)] lg:min-h-[calc(100vh-10rem)] pb-6 lg:pb-8">
+        <div className="bg-white/35 backdrop-blur-sm rounded-2xl min-h-[calc(100vh-14rem)] lg:min-h-[calc(100vh-10rem)] pb-6 lg:pb-7">
           {children}
         </div>
         </div>

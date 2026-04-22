@@ -66,20 +66,49 @@ export default function Rekomendasi() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {data.map((item, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col h-full transform transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-bold text-gray-800 capitalize">{item.jenis_hama}</h3>
-                <span className={`px-3 py-1 rounded-full text-xs font-bold border ${getStatusColor(item.status)}`}>{item.status?.toUpperCase()}</span>
-              </div>
+            <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full transform transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+              {item.gambar && (
+                <div className="h-44 overflow-hidden relative">
+                  <img 
+                    src={item.gambar} 
+                    alt={item.jenis_hama}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://via.placeholder.com/400x200?text=No+Image";
+                    }}
+                  />
+                  <div className="absolute top-4 right-4 focus-ring">
+                     <span className={`px-3 py-1 rounded-full text-[10px] font-black border backdrop-blur-md ${getStatusColor(item.status)}`}>
+                        {item.status?.toUpperCase()}
+                     </span>
+                  </div>
+                </div>
+              )}
+              
+              <div className="p-6 flex flex-col flex-1">
+                {!item.gambar && (
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-bold text-gray-800 capitalize">{item.jenis_hama}</h3>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold border ${getStatusColor(item.status)}`}>{item.status?.toUpperCase()}</span>
+                  </div>
+                )}
+                
+                {item.gambar && (
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold text-gray-800 capitalize">{item.jenis_hama}</h3>
+                  </div>
+                )}
 
-              <div className="mb-6 flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-emerald-600">{item.frekuensi_deteksi}</span>
-                <span className="text-gray-500 text-sm font-medium italic">kali terdeteksi</span>
-              </div>
+                <div className="mb-6 flex items-baseline gap-2">
+                  <span className="text-3xl font-bold text-emerald-600">{item.frekuensi_deteksi}</span>
+                  <span className="text-gray-500 text-sm font-medium italic">kali terdeteksi</span>
+                </div>
 
-              <div className="mt-auto pt-4 border-t border-gray-50">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 block">Saran Tindakan:</label>
-                <p className="text-gray-700 leading-relaxed text-sm bg-gray-50 p-4 rounded-xl italic">"{item.saran}"</p>
+                <div className="mt-auto pt-4 border-t border-gray-50">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 block">Saran Tindakan:</label>
+                  <p className="text-gray-700 leading-relaxed text-sm bg-gray-50 p-4 rounded-xl italic">"{item.saran}"</p>
+                </div>
               </div>
             </div>
           ))}

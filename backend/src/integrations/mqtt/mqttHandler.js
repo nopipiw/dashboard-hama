@@ -1,9 +1,8 @@
 import mqtt from "mqtt";
 
 import Detection from "../../models/detection.model.js";
-import Notification from "../../models/notification.model.js";
-
-const AMBANG_BATAS = { wereng: 2, tikus: 2, burung: 3 };
+import { createAlertFromDetection } from "../../services/alert.service.js";
+import { normalizeDetectionPayload } from "../../validators/detection.validator.js";
 
 export const setupMqtt = (io) => {
   const client = mqtt.connect(process.env.MQTT_URL || "mqtt://broker.emqx.io:1883");
@@ -23,26 +22,16 @@ export const setupMqtt = (io) => {
       const data = JSON.parse(message.toString());
       console.log("Data IoT diterima:", data, "topic:", receivedTopic);
 
-      const payload = { ...data, waktu_deteksi: data.waktu || new Date() };
-      await Detection.simpanData(payload);
+      const payload = normalizeDetectionPayload({ ...data, waktu_deteksi: data.waktu_deteksi || data.waktu }, "sensor");
+      const savedDetection = await Detection.simpanData(payload);
 
-      io.emit("new-detection", data);
+      io.emit("new-detection", savedDetection);
 
-      const jenis = data.jenis_hama?.toLowerCase();
-      const batas = AMBANG_BATAS[jenis] ?? 10;
-
-      if (data.jumlah > batas) {
-        const notif = await Notification.create({
-          jenis_hama: data.jenis_hama,
-          jumlah: data.jumlah,
-          lokasi: data.lokasi || "Sawah Tempuran",
-          message: `Peringatan! ${data.jenis_hama} terdeteksi ${data.jumlah} ekor di ${data.lokasi || "Sawah Tempuran"}. Segera ambil tindakan!`,
-          status: "belum_dibaca",
-        });
-
+      const notif = await createAlertFromDetection(savedDetection);
+      if (notif) {
         io.emit("hama-alert", {
           message: notif.message,
-          data,
+          data: savedDetection,
         });
         console.log("Notifikasi dikirim:", notif.message);
       }

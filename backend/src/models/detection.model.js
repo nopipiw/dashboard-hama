@@ -30,7 +30,7 @@ detectionSchema.statics.getTodayDetections = async function () {
   const end = new Date();
   end.setHours(23, 59, 59, 999);
   return await this.find({
-    waktu_deteksi: { $gte: start, $lte: end }
+    waktu_deteksi: { $gte: start, $lte: end },
   }).sort({ waktu_deteksi: -1 });
 };
 

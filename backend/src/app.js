@@ -6,7 +6,10 @@ import config from "./config/index.js";
 import analysisRoutes from "./routes/analysis.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import detectionsRoutes from "./routes/detections.routes.js";
+import hamasRoutes from "./routes/hamas.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
+import rulesRoutes from "./routes/rules.routes.js";
+import usersRoutes from "./routes/users.routes.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
@@ -39,6 +42,9 @@ app.use(`/api${config.apiPrefix}/auth`, authRoutes);
 app.use(`/api${config.apiPrefix}/detections`, detectionsRoutes);
 app.use(`/api${config.apiPrefix}/analysis`, analysisRoutes);
 app.use(`/api${config.apiPrefix}/notifications`, notificationRoutes);
+app.use(`/api${config.apiPrefix}/rules`, rulesRoutes);
+app.use(`/api${config.apiPrefix}/hamas`, hamasRoutes);
+app.use(`/api${config.apiPrefix}/users`, usersRoutes);
 app.use(errorHandler);
 
 export default app;

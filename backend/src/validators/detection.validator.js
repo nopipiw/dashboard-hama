@@ -1,5 +1,3 @@
-const ALLOWED_PESTS = ["wereng", "tikus", "burung", "burung pipit", "ulat", "kutu daun"];
-
 const sanitizeString = (value) => (typeof value === "string" ? value.trim() : "");
 
 export const normalizeDetectionPayload = (payload = {}, source = "sensor") => {
@@ -8,7 +6,9 @@ export const normalizeDetectionPayload = (payload = {}, source = "sensor") => {
   const sumberAlat =
     sanitizeString(payload.sumber_alat) ||
     (source === "simulation" ? "POSTMAN-SIMULATOR" : "IOT-Node-01");
-  const waktuDeteksi = payload.waktu_deteksi || payload.waktu || new Date().toISOString();
+  const providedWaktuDeteksi = payload.waktu_deteksi || payload.waktu;
+  // Simulasi manual sebaiknya tercatat sebagai kejadian saat ini agar langsung muncul di dashboard hari ini.
+  const waktuDeteksi = source === "simulation" ? new Date().toISOString() : providedWaktuDeteksi || new Date().toISOString();
 
   return {
     hama_id: payload.hama_id,
@@ -21,6 +21,7 @@ export const normalizeDetectionPayload = (payload = {}, source = "sensor") => {
       ...payload.meta,
       ingestion_source: source,
       simulated_via: source === "simulation" ? "postman" : undefined,
+      original_waktu_deteksi: source === "simulation" ? providedWaktuDeteksi : undefined,
     },
   };
 };
@@ -32,8 +33,6 @@ export const validateDetectionPayload = (payload = {}) => {
 
   if (!jenisHama) {
     errors.push("Field 'jenis_hama' wajib diisi.");
-  } else if (!ALLOWED_PESTS.includes(jenisHama)) {
-    errors.push(`Field 'jenis_hama' harus salah satu dari: ${ALLOWED_PESTS.join(", ")}.`);
   }
 
   if (!Number.isFinite(jumlah) || jumlah < 0) {

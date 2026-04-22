@@ -19,6 +19,31 @@ export const login = async (req, res, next) => {
   }
 };
 
+const loginByRole = (expectedRole) => async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const result = await authenticate(username, password);
+
+    if (expectedRole && result.user.role !== expectedRole) {
+      return res.status(403).json({ message: `Akses ditolak: hanya ${expectedRole}.` });
+    }
+
+    return res.status(200).json({
+      message: "Login berhasil",
+      user: {
+        username: result.user.username,
+        role: result.user.role,
+      },
+      token: result.token,
+    });
+  } catch (err) {
+    return res.status(401).json({ message: err.message });
+  }
+};
+
+export const loginAdmin = loginByRole("admin");
+export const loginPetani = loginByRole("petani");
+
 export const register = async (req, res, next) => {
   try {
     const user = await registerUser(req.body);
