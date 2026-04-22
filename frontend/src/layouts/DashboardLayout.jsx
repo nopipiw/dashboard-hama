@@ -46,18 +46,20 @@ export default function DashboardLayout({
       </div>
 
       {notification && (
-        <div className="fixed top-20 lg:top-6 right-4 lg:right-6 z-[100] w-[calc(100%-2rem)] md:w-96 animate-in slide-in-from-right duration-500">
-          <div className="bg-white border-2 border-red-100 rounded-2xl shadow-2xl p-4 lg:p-5 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-red-500"></div>
+        <div className="fixed top-20 lg:top-8 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-6 z-[100] w-[92%] md:w-96 animate-in slide-in-from-top-4 lg:slide-in-from-right duration-500">
+          <div className="bg-white border-2 border-red-200 rounded-2xl shadow-2xl p-4 lg:p-5 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1.5 h-full bg-red-500"></div>
             <div className="flex items-start gap-4">
               <div className="p-2 bg-red-50 rounded-xl text-red-600 animate-bounce">
                 <AlertTriangle className="w-5 h-5 lg:w-6 lg:h-6" />
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <h4 className="font-black text-slate-800 uppercase tracking-tighter text-xs lg:text-sm mb-1">
                   Peringatan!
                 </h4>
-                <p className="text-xs font-bold text-slate-600 leading-snug">{notification.message}</p>
+                <p className="text-[11px] lg:text-xs font-bold text-slate-600 leading-snug break-words">
+                  {notification.message}
+                </p>
                 <div className="mt-3">
                   <Link
                     className="text-[10px] font-black uppercase tracking-widest text-red-600 hover:underline"
@@ -68,7 +70,10 @@ export default function DashboardLayout({
                   </Link>
                 </div>
               </div>
-              <button className="p-1 text-slate-300" onClick={() => setNotification(null)}>
+              <button
+                className="p-1 text-slate-300 hover:text-slate-500 transition-colors"
+                onClick={() => setNotification(null)}
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
